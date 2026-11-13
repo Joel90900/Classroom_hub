@@ -3,29 +3,30 @@
 {% block title %}Resources Summary | ClassroomHub{% endblock %}
 
 {% block content %}
-<div class="card" style="margin-bottom: 2rem;">
-    <h2>Catalog Summary</h2>
-    <p style="color: var(--text-muted); margin-top: 0.25rem;">
-        Private overview of resources calculated via ORM aggregation.
+<div class="card" style="margin-bottom: 2rem; border-left: 5px solid var(--accent);">
+    <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--secondary);">Resumen Analítico del Catálogo</h2>
+    <p style="color: var(--text-muted); margin-top: 0.35rem; font-size: 0.95rem;">
+        Métricas calculadas dinámicamente mediante agregaciones del ORM de Django.
     </p>
 </div>
 
 <div class="grid-cards">
-    <div class="card" style="border-left: 5px solid var(--primary); text-align: center; padding: 2.5rem 1.5rem;">
-        <p style="font-size: 0.95rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Total Resources</p>
-        <p style="font-size: 3rem; font-weight: 800; color: var(--primary); margin: 0.5rem 0;">{{ total_resources }}</p>
-        <p style="font-size: 0.88rem; color: var(--text-muted);">Registered items in the database</p>
+    <div class="card" style="border-top: 4px solid var(--primary); text-align: center; padding: 2.75rem 1.5rem;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block;">Total Resources</span>
+        <span style="font-size: 3.5rem; font-weight: 900; color: var(--primary); margin: 0.5rem 0; display: block; line-height: 1;">{{ total_resources }}</span>
+        <span style="font-size: 0.88rem; color: var(--text-muted);">Recursos registrados en la base de datos</span>
     </div>
 
-    <div class="card" style="border-left: 5px solid var(--success); text-align: center; padding: 2.5rem 1.5rem;">
-        <p style="font-size: 0.95rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Available Resources</p>
-        <p style="font-size: 3rem; font-weight: 800; color: var(--success); margin: 0.5rem 0;">{{ available_resources }}</p>
-        <p style="font-size: 0.88rem; color: var(--text-muted);">Ready for student access</p>
+    <div class="card" style="border-top: 4px solid var(--success); text-align: center; padding: 2.75rem 1.5rem;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block;">Available Resources</span>
+        <span style="font-size: 3.5rem; font-weight: 900; color: var(--success); margin: 0.5rem 0; display: block; line-height: 1;">{{ available_resources }}</span>
+        <span style="font-size: 0.88rem; color: var(--text-muted);">Disponibles para consulta académica inmediata</span>
     </div>
 </div>
 
-<p style="margin-top: 2rem;">
-    <a href="{% url 'pages:dashboard' %}" style="color: var(--primary); font-weight: 600; text-decoration: none;">← Back to Dashboard</a>
-</p>
+<div style="margin-top: 2rem;">
+    <a href="{% url 'pages:dashboard' %}" style="color: var(--text-muted); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.95rem;">
+        ← Volver al Panel de Control
+    </a>
+</div>
 {% endblock %}
-

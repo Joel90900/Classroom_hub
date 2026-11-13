@@ -3,8 +3,10 @@
 {% block title %}Log in | ClassroomHub{% endblock %}
 
 {% block content %}
-<div class="card-auth">
-    <h2>Log in</h2>
+<div class="card-auth" style="border-top: 5px solid var(--primary);">
+    <h2 style="display: flex; align-items: center; gap: 0.5rem;">
+        <span>🔐</span> Log in
+    </h2>
 
     {% if form.errors %}
         <p class="alert-error">The credentials were not accepted.</p>
@@ -14,7 +16,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <input type="hidden" name="next" value="{{ next }}">
-        <button type="submit">Log in</button>
+        <button type="submit" style="margin-top: 0.5rem;">Log in</button>
     </form>
 
     <p class="auth-footer">New to ClassroomHub?

@@ -3,26 +3,42 @@
 {% block title %}Catalog review | ClassroomHub{% endblock %}
 
 {% block content %}
-<div class="card" style="margin-bottom: 2rem;">
-    <h2>Catalog review</h2>
-    <p style="color: var(--text-muted); margin-top: 0.25rem;">This page is available to authorized reviewers.</p>
+<div class="card" style="margin-bottom: 2rem; border-left: 5px solid #8b5cf6;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+            <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--secondary);">Catalog review</h2>
+            <p style="color: var(--text-muted); margin-top: 0.25rem;">
+                This page is available to authorized reviewers.
+            </p>
+        </div>
+        <div>
+            <span style="background: rgba(139, 92, 246, 0.1); color: #7c3aed; border: 1px solid rgba(139, 92, 246, 0.3); font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.85rem; border-radius: 999px;">
+                🛡️ Modo Auditoría
+            </span>
+        </div>
+    </div>
 </div>
 
 <div class="grid-cards">
     {% for resource in resources %}
-        <article class="resource resource-card">
+        <article class="resource resource-card" style="border-top-color: #8b5cf6;">
             <div>
-                <span class="badge-category">{{ resource.category.name }}</span>
-                <h3>{{ resource.title }}</h3>
+                <span class="badge-category" style="background: #f5f3ff; color: #6d28d9; border-color: rgba(139, 92, 246, 0.2);">
+                    {{ resource.category.name }}
+                </span>
+                <h3 style="margin-top: 0.35rem; color: var(--secondary);">{{ resource.title }}</h3>
                 {% if resource.description %}
-                    <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem;">{{ resource.description }}</p>
+                    <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem; line-height: 1.6;">
+                        {{ resource.description }}
+                    </p>
                 {% endif %}
                 <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;">
                     Category: <strong>{{ resource.category.name }}</strong>
                 </p>
             </div>
             <div>
-                <p>Status:
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                    Status:
                     {% if resource.available %}
                         <span class="badge-status badge-available">● Available</span>
                     {% else %}
@@ -32,8 +48,9 @@
             </div>
         </article>
     {% empty %}
-        <p style="color: var(--text-muted); grid-column: 1 / -1;">No resources are available.</p>
+        <div class="card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+            <p style="color: var(--text-muted);">No resources are available.</p>
+        </div>
     {% endfor %}
 </div>
 {% endblock %}
-
