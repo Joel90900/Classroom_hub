@@ -1,6 +1,6 @@
 # ClassroomHub
 
-**ClassroomHub** es un portal web didáctico para recursos de aprendizaje y proyectos, desarrollado sobre **Django 6.1.3** y conectado a **MySQL/MariaDB**. Demuestra la arquitectura **MTV** (Model-Template-View), autenticación de usuarios, gestión de sesiones del lado del servidor, grupos, permisos del framework y un **CRUD completo** con vistas basadas en clases (CBV) y `ModelForm`.
+**ClassroomHub** es un portal web didáctico para recursos de aprendizaje y proyectos, desarrollado sobre **Django 6.1.3** y conectado a **MySQL/MariaDB**. 
 
 ---
 
@@ -103,19 +103,7 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 ```
 
----
 
-## 🧪 Ejecución de la Suite de Pruebas
-
-ClassroomHub cuenta con **55 pruebas automatizadas**:
-- **10 pruebas** del Laboratorio 07 (Modelos, relaciones `PROTECT`, representaciones y vistas).
-- **12 pruebas** de Autenticación y Sesiones (Registro, validación, login, logout POST, CSRF).
-- **6 pruebas** de Permisos y Revisión de Catálogo (HTTP 403, grupos).
-- **6 pruebas** de `ResourceForm` (Validación de título, longitud mínima, espacios en blanco, categorías).
-- **4 pruebas** de `ResourceDetailView` (Consulta pública, contenido, 404 para inexistentes).
-- **6 pruebas** de `ResourceCreateView` (Redirección anónima, 403 para usuarios sin permiso, alta exitosa y errores).
-- **6 pruebas** de `ResourceUpdateView` (Protección 403, persistencia sin duplicar PK, 404 en edición).
-- **5 pruebas** de `ResourceDeleteView` (Protección 403, GET no elimina, POST elimina y redirige).
 
 Para ejecutar las 55 pruebas en la base descartable `test_classroom_hub`:
 
