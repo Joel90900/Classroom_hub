@@ -3,16 +3,18 @@
 {% block title %}Resources | ClassroomHub{% endblock %}
 
 {% block content %}
-<div class="card" style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+<div class="card" style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.25rem; border-left: 5px solid var(--primary);">
     <div>
-        <h2>Learning resources</h2>
-        <p style="color: var(--text-muted); margin-top: 0.25rem;">Browse the available learning materials.</p>
+        <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--secondary); letter-spacing: -0.02em;">Learning resources</h2>
+        <p style="color: var(--text-muted); margin-top: 0.25rem; font-size: 1rem;">
+            Browse the available learning materials.
+        </p>
     </div>
 
     {% if perms.pages.add_resource %}
         <div>
-            <a href="{% url 'pages:resource-create' %}" style="background: var(--primary); color: #ffffff; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.35rem;">
-                ➕ New Resource
+            <a href="{% url 'pages:resource-create' %}" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #ffffff; padding: 0.7rem 1.4rem; border-radius: var(--radius-sm); font-weight: 700; text-decoration: none; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.4rem; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.2s ease;">
+                <span>➕</span> Nuevo Recurso
             </a>
         </div>
     {% endif %}
@@ -23,21 +25,27 @@
         <article class="resource resource-card">
             <div>
                 <span class="badge-category">{{ resource.category.name }}</span>
-                <h3>
-                    <a href="{% url 'pages:resource-detail' pk=resource.pk %}" style="color: var(--secondary); text-decoration: none;">
+                <h3 style="font-size: 1.3rem; margin-top: 0.35rem;">
+                    <a href="{% url 'pages:resource-detail' pk=resource.pk %}" style="color: var(--secondary); text-decoration: none; transition: color 0.2s;">
                         {{ resource.title }}
                     </a>
                 </h3>
+
                 {% if resource.description %}
-                    <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem;">{{ resource.description|truncatewords:20 }}</p>
+                    <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.25rem; line-height: 1.6;">
+                        {{ resource.description|truncatewords:20 }}
+                    </p>
                 {% endif %}
-                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">
                     Category: <strong>{{ resource.category.name }}</strong>
                 </p>
             </div>
+
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
-                    <p>Status:
+                    <p style="font-size: 0.88rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem;">
+                        Status:
                         {% if resource.available %}
                             <span class="badge-status badge-available">● Available</span>
                         {% else %}
@@ -46,8 +54,8 @@
                     </p>
                 </div>
 
-                <div style="display: flex; gap: 0.75rem; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border); font-size: 0.88rem;">
-                    <a href="{% url 'pages:resource-detail' pk=resource.pk %}" style="color: var(--primary); font-weight: 600; text-decoration: none;">
+                <div style="display: flex; gap: 0.85rem; align-items: center; margin-top: 1.25rem; padding-top: 0.85rem; border-top: 1px solid var(--border); font-size: 0.88rem;">
+                    <a href="{% url 'pages:resource-detail' pk=resource.pk %}" style="color: var(--primary-dark); font-weight: 700; text-decoration: none;">
                         Details →
                     </a>
 
@@ -66,7 +74,9 @@
             </div>
         </article>
     {% empty %}
-        <p style="color: var(--text-muted); grid-column: 1 / -1;">No resources are available.</p>
+        <div class="card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+            <p style="color: var(--text-muted); font-size: 1.1rem;">No resources are available.</p>
+        </div>
     {% endfor %}
 </div>
 {% endblock %}

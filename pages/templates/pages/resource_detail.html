@@ -3,16 +3,24 @@
 {% block title %}{{ resource.title }} | ClassroomHub{% endblock %}
 
 {% block content %}
-<div class="card" style="max-width: 800px; margin: 0 auto;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+<div class="card" style="max-width: 850px; margin: 0 auto; box-shadow: var(--shadow-card); border-top: 5px solid var(--primary);">
+    <div style="margin-bottom: 1.5rem;">
+        <a href="{% url 'pages:resources' %}" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem; transition: color 0.2s;">
+            ← Volver al catálogo de recursos
+        </a>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.25rem;">
         <div>
-            <span class="badge-category">{{ resource.category.name }}</span>
-            {% if resource.resource_type %}
-                <span style="background: #f1f5f9; color: var(--text-muted); font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; margin-left: 0.4rem;">
-                    {{ resource.resource_type }}
-                </span>
-            {% endif %}
-            <h2 style="font-size: 1.75rem; margin-top: 0.5rem; color: var(--secondary);">{{ resource.title }}</h2>
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+                <span class="badge-category">{{ resource.category.name }}</span>
+                {% if resource.resource_type %}
+                    <span style="background: var(--surface-muted); color: var(--text-muted); font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; border: 1px solid var(--border);">
+                        {{ resource.resource_type }}
+                    </span>
+                {% endif %}
+            </div>
+            <h2 style="font-size: 2rem; font-weight: 800; color: var(--secondary); letter-spacing: -0.02em;">{{ resource.title }}</h2>
         </div>
 
         <div>
@@ -25,46 +33,50 @@
     </div>
 
     <div style="margin-bottom: 2rem;">
-        <h4 style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Description</h4>
+        <h4 style="color: var(--text-muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 0.65rem;">
+            Descripción del recurso
+        </h4>
         {% if resource.description %}
-            <p style="font-size: 1.05rem; line-height: 1.7; color: var(--text-main);">{{ resource.description }}</p>
+            <p style="font-size: 1.08rem; line-height: 1.7; color: var(--text-main);">{{ resource.description }}</p>
         {% else %}
-            <p style="color: var(--text-muted); font-style: italic;">No description provided for this resource.</p>
+            <p style="color: var(--text-muted); font-style: italic;">Sin descripción detallada.</p>
         {% endif %}
     </div>
 
-    <div style="background: var(--background); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin-bottom: 2rem;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; font-size: 0.92rem;">
+    <!-- METADATA BOX -->
+    <div style="background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.5rem; margin-bottom: 2rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; font-size: 0.94rem;">
             <div>
-                <span style="color: var(--text-muted); display: block;">Category:</span>
+                <span style="color: var(--text-muted); display: block; font-size: 0.85rem; margin-bottom: 0.2rem;">Categoría:</span>
                 <strong>{{ resource.category.name }}</strong>
             </div>
             <div>
-                <span style="color: var(--text-muted); display: block;">Resource Type:</span>
-                <strong>{{ resource.resource_type|default:"Not specified" }}</strong>
+                <span style="color: var(--text-muted); display: block; font-size: 0.85rem; margin-bottom: 0.2rem;">Tipo de recurso:</span>
+                <strong>{{ resource.resource_type|default:"No especificado" }}</strong>
             </div>
             <div>
-                <span style="color: var(--text-muted); display: block;">Added on:</span>
-                <strong>{{ resource.created_at|date:"M d, Y" }}</strong>
+                <span style="color: var(--text-muted); display: block; font-size: 0.85rem; margin-bottom: 0.2rem;">Registrado el:</span>
+                <strong>{{ resource.created_at|date:"d M Y" }}</strong>
             </div>
         </div>
     </div>
 
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 1px solid var(--border); padding-top: 1.5rem;">
-        <a href="{% url 'pages:resources' %}" style="color: var(--primary); font-weight: 600; text-decoration: none;">
-            ← Back to catalog
+    <!-- ACTION BUTTONS FOR EDITORS -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding-top: 1.25rem; border-top: 1px solid var(--border);">
+        <a href="{% url 'pages:resources' %}" style="color: var(--text-muted); font-weight: 600; text-decoration: none; font-size: 0.95rem;">
+            ← Volver
         </a>
 
         <div style="display: flex; gap: 0.75rem;">
             {% if perms.pages.change_resource %}
-                <a href="{% url 'pages:resource-edit' pk=resource.pk %}" style="background: #2563eb; color: #ffffff; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.92rem;">
-                    ✏️ Edit resource
+                <a href="{% url 'pages:resource-edit' pk=resource.pk %}" style="background: #2563eb; color: #ffffff; padding: 0.55rem 1.2rem; border-radius: var(--radius-sm); font-weight: 600; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+                    ✏️ Editar
                 </a>
             {% endif %}
 
             {% if perms.pages.delete_resource %}
-                <a href="{% url 'pages:resource-delete' pk=resource.pk %}" style="background: #ef4444; color: #ffffff; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.92rem;">
-                    🗑️ Delete
+                <a href="{% url 'pages:resource-delete' pk=resource.pk %}" style="background: var(--danger); color: #ffffff; padding: 0.55rem 1.2rem; border-radius: var(--radius-sm); font-weight: 600; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+                    🗑️ Eliminar
                 </a>
             {% endif %}
         </div>
